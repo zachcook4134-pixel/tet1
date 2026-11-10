@@ -1,0 +1,229 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wilderness Survival</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Import map for Three.js ES Modules -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="crosshair">+</div>
+
+    <!-- Weather & Season HUD Badge -->
+    <div id="weather-ui">
+        <div class="weather-main">
+            <span id="weather-icon">☀️</span>
+            <div class="weather-text">
+                <div id="weather-desc">Clear Skies</div>
+                <div id="season-text">🌸 Spring</div>
+            </div>
+        </div>
+        <div id="temp-text">15°C / 59°F</div>
+    </div>
+    
+    <div id="vitals-ui">
+        <div class="vital-bar"><div id="health-fill" class="fill health"></div><span>Health</span></div>
+        <div class="vital-bar"><div id="stamina-fill" class="fill stamina"></div><span>Stamina</span></div>
+        <div class="vital-bar"><div id="hunger-fill" class="fill hunger"></div><span>Hunger</span></div>
+        <div class="vital-bar"><div id="thirst-fill" class="fill thirst"></div><span>Thirst</span></div>
+        <div class="vital-bar"><div id="temp-fill" class="fill temp"></div><span id="temp-val-text">Temp: 37.0°C</span></div>
+    </div>
+
+ 
+
+
+    <!-- Hotbar UI -->
+    <div id="hotbar-ui"></div>
+
+    <div id="blocker">
+        <div id="instructions">
+            <p>Click to Play</p>
+            <p>WASD: Move | Left Click: Look/Action | 1-5: Hotbar | E: Interact | F: Flashlight | SHIFT: Sprint | SPACE: Jump | F5 / K: Quick Save | F9 / L: Quick Load</p>
+        </div>
+    </div>
+
+    <!-- Death UI Overlay -->
+<div id="death-ui" class="hidden">
+    <div class="death-card">
+        <h1>YOU DIED</h1>
+        <p>You succumbed to the wilderness.</p>
+        <button id="respawn-btn">Respawn</button>
+    </div>
+</div>
+
+    <div id="inventory-ui" class="hidden">
+        <div class="inventory-header">
+            <div class="tab-bar">
+                <button id="tab-btn-inv" class="tab-btn active">🎒 Inventory</button>
+                <button id="tab-btn-craft" class="tab-btn">🛠️ Crafting</button>
+            </div>
+            <span class="hint">Press <strong>Q</strong> or <strong>C</strong> to Close</span>
+        </div>
+
+        <!-- Inventory Tab View -->
+<div id="inventory-view" class="tab-view">
+    <div class="inventory-dual-pane">
+        <!-- Left Pane: Active External Containers -->
+        <div class="inventory-left-pane">
+            <!-- ATV Management UI -->
+            <div id="atv-trunk-section" class="hidden">
+                <div class="trunk-header">🚜 ATV Management</div>
+                
+                <!-- Biofuel Refuel Slot & Live Status Gauge -->
+                <div class="atv-fuel-container">
+                    <div class="atv-fuel-slot" id="atv-fuel-input-slot" data-slot="fuel">
+                        <span class="atv-fuel-slot-label">Fuel Slot</span>
+                    </div>
+                    <div class="atv-fuel-status">
+                        <div id="atv-fuel-status-text">Fuel: 100%</div>
+                        <div class="process-bar-container">
+                            <div id="atv-ui-fuel-fill" class="process-bar-fill"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Storage Grid -->
+                <div class="trunk-header">📦 Trunk Storage (8 Slots)</div>
+                <div id="atv-trunk-grid"></div>
+            </div>
+
+            <div id="chest-section" class="hidden">
+                <div class="chest-header">📦 Storage Chest (16 Slots)</div>
+                <div id="chest-grid"></div>
+            </div>
+
+            <div id="furnace-section" class="hidden">
+                <div class="furnace-header">🌋 Furnace</div>
+                <div id="furnace-grid">
+                    <div class="furnace-slot" id="furnace-input-slot" data-slot="0">
+                        <span class="furnace-slot-label">Ore</span>
+                    </div>
+                    <div class="furnace-slot" id="furnace-fuel-slot" data-slot="1">
+                        <span class="furnace-slot-label">Fuel</span>
+                    </div>
+                    <div class="furnace-slot output-slot" id="furnace-output-slot" data-slot="2">
+                        <span class="furnace-slot-label">Output</span>
+                    </div>
+                    <div class="furnace-slot output-slot" id="furnace-charcoal-slot" data-slot="3">
+                        <span class="furnace-slot-label">Charcoal</span>
+                    </div>
+                </div>
+                <div class="process-bar-container">
+                    <div id="furnace-progress-fill" class="process-bar-fill"></div>
+                </div>
+                <div id="furnace-status-text" class="status-label">Idle</div>
+            </div>
+
+            <div id="campfire-section" class="hidden">
+                <div class="campfire-header">🔥 Campfire</div>
+                <div id="campfire-grid">
+                    <div class="campfire-slot" id="campfire-input-slot" data-slot="0">
+                        <span class="campfire-slot-label">Food</span>
+                    </div>
+                    <div class="campfire-slot" id="campfire-fuel-slot" data-slot="1">
+                        <span class="campfire-slot-label">Fuel</span>
+                    </div>
+                    <div class="campfire-slot output-slot" id="campfire-output-slot" data-slot="2">
+                        <span class="campfire-slot-label">Output</span>
+                    </div>
+                    <div class="campfire-slot output-slot" id="campfire-charcoal-slot" data-slot="3">
+                        <span class="campfire-slot-label">Charcoal</span>
+                    </div>
+                </div>
+                <div class="process-bar-container">
+                    <div id="campfire-progress-fill" class="process-bar-fill"></div>
+                </div>
+                <div id="campfire-status-text" class="status-label">Idle</div>
+            </div>
+
+            <!-- Sawmill Container UI -->
+            <div id="sawmill-section" class="hidden">
+                <div class="sawmill-header">🪓 Sawmill</div>
+                <div id="sawmill-grid">
+                    <div class="sawmill-slot" id="sawmill-input-slot">
+                        <span class="sawmill-slot-label">Wood</span>
+                    </div>
+                    <div class="sawmill-slot output-slot" id="sawmill-output-slot">
+                        <span class="sawmill-slot-label">Planks</span>
+                    </div>
+                </div>
+                <div class="process-bar-container">
+                    <div id="sawmill-progress-fill" class="process-bar-fill"></div>
+                </div>
+                <div id="sawmill-status-text" class="status-label">Idle</div>
+            </div>
+
+            <!-- Stone Crusher Container UI -->
+            <div id="stone-crusher-section" class="hidden">
+                <div class="stone-crusher-header">🪨 Stone Crusher</div>
+                <div id="stone-crusher-grid">
+                    <div class="stone-crusher-slot" id="stone-crusher-input-slot">
+                        <span class="stone-crusher-slot-label">Stone</span>
+                    </div>
+                    <div class="stone-crusher-slot output-slot" id="stone-crusher-output-slot">
+                        <span class="stone-crusher-slot-label">Gravel</span>
+                    </div>
+                </div>
+                <div class="process-bar-container">
+                    <div id="stone-crusher-progress-fill" class="process-bar-fill"></div>
+                </div>
+                <div id="stone-crusher-status-text" class="status-label">Idle</div>
+            </div>
+
+            <!-- Fur Processing Stand Container UI -->
+            <div id="fur-stand-section" class="hidden">
+                <div class="fur-stand-header">🧵 Fur Processing Stand</div>
+                <div id="fur-stand-grid">
+                    <div class="fur-stand-slot" id="fur-stand-input-slot">
+                        <span class="fur-stand-slot-label">Raw Fur</span>
+                    </div>
+                    <div class="fur-stand-slot output-slot" id="fur-stand-output-slot">
+                        <span class="fur-stand-slot-label">Finished Pelt</span>
+                    </div>
+                </div>
+                <div class="process-bar-container">
+                    <div id="fur-stand-progress-fill" class="process-bar-fill"></div>
+                </div>
+                <div id="fur-stand-status-text" class="status-label">Idle</div>
+            </div>
+        </div>
+
+        <!-- Right Pane: Player Inventory & Equipment -->
+        <div class="inventory-right-pane">
+            <div id="equipment-section">
+                <div class="equipment-header">🛡️ Equipment</div>
+                <div id="equipment-grid"></div>
+            </div>
+
+            <div id="backpack-section" class="hidden">
+                <div class="backpack-header">🎒 Leather Backpack (10 Extra Slots)</div>
+                <div id="backpack-grid"></div>
+            </div>
+
+            <div id="inventory-grid"></div>
+        </div>
+    </div>
+    <div class="usage-hint">💡 Drag items to organize/swap. Right-click Backpack, Bandages, or Food to use/equip.</div>
+</div>
+
+        <!-- Crafting Tab View -->
+        <div id="crafting-view" class="tab-view hidden">
+            <div id="crafting-list"></div>
+        </div>
+    </div>
+
+   
+
+    <script type="module" src="main.js"></script>
+</body>
+</html>

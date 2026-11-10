@@ -1,0 +1,1096 @@
+/* style.css */
+body {
+    margin: 0;
+    overflow: hidden;
+    background-color: #87CEEB;
+    font-family: monospace;
+    user-select: none;
+}
+
+#crosshair {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 24px;
+    pointer-events: none;
+    z-index: 10;
+    text-shadow: 1px 1px 2px black;
+}
+
+#vitals-ui {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    width: 250px;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.vital-bar {
+    width: 100%;
+    height: 20px;
+    background: #333;
+    margin-bottom: 10px;
+    position: relative;
+    border: 1px solid #111;
+}
+
+.vital-bar span {
+    position: absolute;
+    top: 2px;
+    left: 8px;
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+    pointer-events: none;
+}
+
+.fill {
+    height: 100%;
+    width: 100%;
+    transition: width 0.1s linear, background-color 0.2s ease;
+}
+
+.health { background: #e74c3c; }
+.stamina { background: #f1c40f; }
+.hunger { background: #e67e22; }
+.thirst { background: #3498db; }
+.temp { background: #2ecc71; }
+
+/* Hotbar UI */
+#hotbar-ui {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #444;
+}
+
+.hotbar-slot {
+    width: 52px;
+    height: 52px;
+    background: #222;
+    border: 2px solid #555;
+    border-radius: 6px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.hotbar-slot.active {
+    border-color: #f1c40f;
+    box-shadow: 0 0 8px rgba(241, 196, 15, 0.8);
+    background: #333;
+}
+
+.slot-num {
+    position: absolute;
+    top: 3px;
+    left: 5px;
+    font-size: 10px;
+    color: #aaa;
+}
+
+.slot-icon {
+    font-size: 24px;
+}
+
+.slot-count-badge {
+    position: absolute;
+    bottom: 4px;
+    right: 5px;
+    font-size: 11px;
+    color: #3498db;
+    font-weight: bold;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 1px 4px;
+    border-radius: 4px;
+}
+
+#blocker {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 20;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+}
+
+#instructions p {
+    font-size: 24px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+#inventory-ui {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 680px;
+    background: rgba(20, 20, 25, 0.96);
+    border: 2px solid #555;
+    border-radius: 12px;
+    padding: 20px;
+    color: white;
+    z-index: 30;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(6px);
+}
+
+.inventory-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #444;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.inventory-header h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.inventory-header .hint {
+    font-size: 12px;
+    color: #aaa;
+}
+
+.tab-bar {
+    display: flex;
+    gap: 8px;
+}
+
+.tab-btn {
+    background: #2a2a35;
+    border: 1px solid #444;
+    color: #aaa;
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 13px;
+    transition: all 0.15s ease;
+}
+
+.tab-btn.active {
+    background: #e67e22;
+    color: white;
+    border-color: #f39c12;
+}
+
+.usage-hint {
+    margin-top: 12px;
+    font-size: 11px;
+    color: #8a8d93;
+    text-align: center;
+}
+
+/* Equipment UI Section */
+#equipment-section {
+    background: rgba(15, 15, 20, 0.85);
+    border: 1px solid #444;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 12px;
+}
+
+.equipment-header {
+    font-weight: bold;
+    font-size: 13px;
+    color: #f1c40f;
+    margin-bottom: 6px;
+    text-align: center;
+}
+
+#equipment-grid {
+    display: flex;
+    justify-content: space-around;
+    gap: 8px;
+}
+
+.equipment-slot {
+    width: 30%;
+    height: 52px;
+    background: #1c1c24;
+    border: 2px dashed #555;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.equipment-slot.occupied {
+    border-style: solid;
+    border-color: #f1c40f;
+    background: #2a2a35;
+}
+
+.slot-type-label {
+    font-size: 10px;
+    color: #777;
+    pointer-events: none;
+}
+
+#inventory-view {
+    max-height: 480px;
+    overflow-y: auto;
+    padding-right: 6px;
+}
+
+#inventory-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    min-height: 120px;
+}
+
+.inventory-slot {
+    display: flex;
+    align-items: center;
+    background: #2a2a2a;
+    border: 1px solid #444;
+    border-radius: 6px;
+    padding: 10px;
+    position: relative;
+    box-sizing: border-box;
+    height: 54px;
+}
+
+.empty-slot-label {
+    color: #555;
+    font-size: 12px;
+    font-style: italic;
+}
+
+.slot-details {
+    display: flex;
+    flex-direction: column;
+    margin-left: 8px;
+}
+
+.slot-name {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* Weather UI */
+#weather-ui {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(15, 15, 20, 0.75);
+    border: 1px solid #444;
+    border-radius: 8px;
+    padding: 10px 14px;
+    color: white;
+    z-index: 10;
+    min-width: 140px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+}
+
+.weather-main {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 4px;
+}
+
+#weather-icon {
+    font-size: 26px;
+}
+
+.weather-text {
+    display: flex;
+    flex-direction: column;
+}
+
+#weather-desc {
+    font-weight: bold;
+    font-size: 13px;
+    color: #f1f2f6;
+}
+
+#season-text {
+    font-size: 11px;
+    color: #a4b0be;
+}
+
+#temp-text {
+    font-size: 13px;
+    font-weight: bold;
+    color: #eccc68;
+    text-align: right;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding-top: 4px;
+    margin-top: 4px;
+}
+
+/* Dedicated Backpack Container Section Styles */
+#backpack-section {
+    background: rgba(15, 15, 20, 0.85);
+    border: 1px solid #8a6d4d;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 12px;
+}
+
+.backpack-header {
+    font-weight: bold;
+    font-size: 13px;
+    color: #d4a373;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+#backpack-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+}
+
+.backpack-slot {
+    width: 100%;
+    height: 48px;
+    background: #1c1c24;
+    border: 1px solid #555;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.backpack-slot .slot-icon {
+    font-size: 20px;
+}
+
+/* Crafting Tab Styles */
+#crafting-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 320px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.crafting-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #282832;
+    border: 1px solid #444;
+    border-radius: 8px;
+    padding: 10px 12px;
+}
+
+.crafting-card.craftable {
+    border-color: #27ae60;
+    background: #1e3325;
+}
+
+.crafting-card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.crafting-icon {
+    font-size: 26px;
+}
+
+.crafting-title-group {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.crafting-name {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.ingredients-list {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.ing-badge {
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.ing-badge.has-enough {
+    background: rgba(39, 174, 96, 0.3);
+    color: #2ecc71;
+    border: 1px solid #27ae60;
+}
+
+.ing-badge.missing {
+    background: rgba(231, 76, 60, 0.25);
+    color: #e74c3c;
+    border: 1px solid #c0392b;
+}
+
+.craft-btn {
+    background: #27ae60;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.craft-btn:disabled {
+    background: #444;
+    color: #888;
+    cursor: not-allowed;
+}
+
+/* Drag and Drop Feedback */
+.inventory-slot[draggable="true"],
+.hotbar-slot[draggable="true"] {
+    cursor: grab;
+}
+
+.inventory-slot[draggable="true"]:active,
+.hotbar-slot[draggable="true"]:active {
+    cursor: grabbing;
+}
+
+.inventory-dual-pane {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.inventory-left-pane {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.inventory-right-pane {
+    flex: 1.2;
+    display: flex;
+    flex-direction: column;
+}
+
+.dragging {
+    opacity: 0.4;
+    border-style: dashed !important;
+    border-color: #e67e22 !important;
+}
+
+.drag-over {
+    border-color: #2ecc71 !important;
+    background-color: rgba(46, 204, 113, 0.2) !important;
+    box-shadow: 0 0 10px rgba(46, 204, 113, 0.6);
+}
+
+/* Chest Container Section Styles */
+#chest-section {
+    background: rgba(15, 15, 20, 0.85);
+    border: 1px solid #6e4727;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 15px;
+}
+
+.chest-slot {
+    width: 100%;
+    height: 50px;
+    background: #1c1c24;
+    border: 1px solid #444;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.furnace-slot:has(.slot-icon) .furnace-slot-label,
+.campfire-slot:has(.slot-icon) .campfire-slot-label {
+    display: none;
+}
+
+.chest-header {
+    font-weight: bold;
+    font-size: 14px;
+    color: #e67e22;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+#chest-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+}
+
+.chest-slot .slot-icon {
+    font-size: 22px;
+}
+
+/* Furnace Section UI */
+#furnace-section {
+    background: rgba(25, 20, 15, 0.9);
+    border: 1px solid #d35400;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 15px;
+}
+
+.furnace-header {
+    font-weight: bold;
+    font-size: 14px;
+    color: #e67e22;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+#furnace-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.furnace-slot {
+    width: 100%;
+    height: 64px;
+    background: #1c1a24;
+    border: 1px solid #d35400;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.furnace-slot.output-slot {
+    border-color: #f1c40f;
+    background: #2a2415;
+}
+
+.furnace-slot-label {
+    position: absolute;
+    top: 3px;
+    font-size: 9px;
+    color: #aaa;
+    pointer-events: none;
+    text-align: center;
+}
+
+#smelt-action-btn {
+    width: 100%;
+    padding: 10px;
+    background: #e67e22;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-weight: bold;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+#smelt-action-btn:hover:not(:disabled) {
+    background: #d35400;
+}
+
+#smelt-action-btn:disabled {
+    background: #444;
+    color: #888;
+    cursor: not-allowed;
+}
+
+/* Campfire Section UI */
+#campfire-section {
+    background: rgba(25, 20, 15, 0.9);
+    border: 1px solid #e67e22;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 15px;
+}
+
+.campfire-header {
+    font-weight: bold;
+    font-size: 14px;
+    color: #e67e22;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+#campfire-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.campfire-slot {
+    width: 100%;
+    height: 64px;
+    background: #1c1a24;
+    border: 1px solid #e67e22;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.campfire-slot.output-slot {
+    border-color: #f1c40f;
+    background: #2a2415;
+}
+
+.campfire-slot-label {
+    position: absolute;
+    top: 3px;
+    font-size: 9px;
+    color: #aaa;
+    pointer-events: none;
+    text-align: center;
+}
+
+#cook-action-btn {
+    width: 100%;
+    padding: 10px;
+    background: #e67e22;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-weight: bold;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+#cook-action-btn:hover:not(:disabled) {
+    background: #d35400;
+}
+
+#cook-action-btn:disabled {
+    background: #444;
+    color: #888;
+    cursor: not-allowed;
+}
+
+/* Processing Bar & Status UI */
+.process-bar-container {
+    width: 100%;
+    height: 10px;
+    background: #111;
+    border: 1px solid #444;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 8px;
+    margin-bottom: 6px;
+}
+
+.process-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #e67e22, #f1c40f);
+    transition: width 0.1s linear;
+}
+
+.status-label {
+    font-size: 11px;
+    color: #aaa;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Death UI Overlay */
+#death-ui {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(40, 0, 0, 0.85);
+    z-index: 50;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(8px);
+}
+
+.death-card {
+    text-align: center;
+    color: #ffffff;
+    font-family: monospace;
+}
+
+.death-card h1 {
+    font-size: 56px;
+    color: #e74c3c;
+    margin: 0 0 10px 0;
+    text-shadow: 0 0 12px rgba(231, 76, 60, 0.8);
+    letter-spacing: 4px;
+}
+
+.death-card p {
+    font-size: 16px;
+    color: #aaaaaa;
+    margin-bottom: 25px;
+}
+
+#respawn-btn {
+    background: #e74c3c;
+    border: none;
+    color: white;
+    padding: 12px 32px;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: inherit;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease;
+    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+}
+
+#respawn-btn:hover {
+    background: #c0392b;
+    transform: scale(1.05);
+}
+
+/* Durability Bar Overlay */
+.durability-bar {
+    position: absolute;
+    bottom: 2px;
+    left: 4px;
+    right: 4px;
+    height: 4px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 2px;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.durability-fill {
+    height: 100%;
+    width: 100%;
+    background: #2ecc71;
+    transition: width 0.15s ease, background-color 0.2s ease;
+}
+
+/* Color stages based on percentage */
+.durability-fill.high { background: #2ecc71; }
+.durability-fill.medium { background: #f1c40f; }
+.durability-fill.low { background: #e74c3c; }
+
+/* Sawmill, Stone Crusher, & Fur Stand UI Sections */
+#sawmill-section, #stone-crusher-section, #fur-stand-section {
+    background: rgba(25, 20, 15, 0.9);
+    border: 1px solid #e67e22;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 15px;
+}
+
+.sawmill-header, .stone-crusher-header, .fur-stand-header {
+    font-weight: bold;
+    font-size: 14px;
+    color: #e67e22;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+#sawmill-grid, #stone-crusher-grid, #fur-stand-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.sawmill-slot, .stone-crusher-slot, .fur-stand-slot {
+    width: 100%;
+    height: 64px;
+    background: #1c1a24;
+    border: 1px solid #e67e22;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.sawmill-slot.output-slot, .stone-crusher-slot.output-slot, .fur-stand-slot.output-slot {
+    border-color: #f1c40f;
+    background: #2a2415;
+}
+
+.sawmill-slot-label, .stone-crusher-slot-label, .fur-stand-slot-label {
+    position: absolute;
+    top: 3px;
+    font-size: 9px;
+    color: #aaa;
+    pointer-events: none;
+    text-align: center;
+}
+
+/* Append to style.css */
+#market-ui {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 740px;
+    background: rgba(18, 20, 26, 0.96);
+    border: 2px solid #f1c40f;
+    border-radius: 12px;
+    padding: 20px;
+    color: white;
+    z-index: 35;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+}
+
+.market-dialog { display: flex; flex-direction: column; gap: 14px; }
+.market-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #444; padding-bottom: 10px; }
+.header-left { display: flex; align-items: center; gap: 12px; }
+.header-left h2 { margin: 0; font-size: 22px; color: #f1c40f; }
+.event-badge { background: rgba(230, 126, 34, 0.25); border: 1px solid #e67e22; color: #e67e22; padding: 3px 8px; border-radius: 6px; font-size: 11px; font-weight: bold; }
+.header-right { display: flex; align-items: center; gap: 16px; }
+.coin-display { font-size: 16px; font-weight: bold; color: #f1c40f; background: #2a2a2a; padding: 4px 12px; border-radius: 6px; border: 1px solid #555; }
+.close-btn { background: transparent; border: none; color: #aaa; font-size: 24px; cursor: pointer; }
+.close-btn:hover { color: white; }
+.market-tabs { display: flex; gap: 10px; }
+.market-tab-btn { flex: 1; background: #24252e; border: 1px solid #444; color: #aaa; padding: 8px; border-radius: 6px; font-weight: bold; font-family: inherit; cursor: pointer; transition: all 0.2s ease; }
+.market-tab-btn.active { background: #f1c40f; color: #111; border-color: #f39c12; }
+.market-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; max-height: 380px; overflow-y: auto; padding-right: 6px; }
+.market-card { display: flex; justify-content: space-between; align-items: center; background: #242530; border: 1px solid #3d3e4d; border-radius: 8px; padding: 10px; }
+.card-info { display: flex; align-items: center; gap: 10px; }
+.card-icon { font-size: 26px; }
+.card-details { display: flex; flex-direction: column; }
+.card-name { font-weight: bold; font-size: 13px; }
+.card-stock { font-size: 10px; color: #888; }
+.card-trading { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+.price-tag { font-weight: bold; font-size: 13px; display: flex; align-items: center; gap: 4px; }
+.trend-up { color: #2ecc71; }
+.trend-down { color: #e74c3c; }
+.trend-stable { color: #f1c40f; }
+.btn-group { display: flex; gap: 4px; }
+.trade-btn { border: none; color: white; padding: 5px 10px; border-radius: 4px; font-size: 11px; font-weight: bold; font-family: inherit; cursor: pointer; }
+.buy-btn { background: #27ae60; }
+.buy-btn:hover { background: #219653; }
+.sell-btn { background: #e67e22; }
+.sell-btn:hover { background: #d35400; }
+.trade-btn:disabled { background: #444; color: #777; cursor: not-allowed; }
+.market-footer { text-align: center; font-size: 11px; color: #777; border-top: 1px solid #333; padding-top: 8px; }
+
+/* --- DYNAMIC FROSTBITE OVERLAY --- */
+#frost-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 15;
+    background: radial-gradient(circle, transparent 25%, rgba(160, 210, 255, 0.45) 65%, rgba(220, 240, 255, 0.95) 100%);
+    box-shadow: inset 0 0 100px rgba(180, 230, 255, 0.8);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    mix-blend-mode: screen;
+}
+
+/* ATV Fuel Gauge HUD Overlay */
+#atv-hud {
+    position: absolute;
+    bottom: 90px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 220px;
+    background: rgba(15, 15, 20, 0.85);
+    border: 1px solid #c0392b;
+    border-radius: 8px;
+    padding: 8px 12px;
+    z-index: 12;
+    color: white;
+}
+
+.atv-hud-title {
+    font-size: 11px;
+    font-weight: bold;
+    color: #e74c3c;
+    margin-bottom: 4px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.atv-fuel-bar {
+    width: 100%;
+    height: 12px;
+    background: #222;
+    border: 1px solid #444;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+#atv-fuel-fill {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(90deg, #e74c3c, #f1c40f);
+    transition: width 0.1s linear;
+}
+
+/* ATV Trunk Section inside Inventory UI */
+#atv-trunk-section {
+    background: rgba(20, 25, 30, 0.9);
+    border: 1px solid #c0392b;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 12px;
+}
+
+.trunk-header {
+    font-weight: bold;
+    font-size: 13px;
+    color: #e74c3c;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+#atv-trunk-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+
+.trunk-slot {
+    width: 100%;
+    height: 48px;
+    background: #1c1c24;
+    border: 1px solid #555;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+}
+
+/* style.css */
+.atv-fuel-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #1c1a24;
+    border: 1px solid #c0392b;
+    border-radius: 6px;
+    padding: 8px 12px;
+    margin-bottom: 12px;
+}
+
+.atv-fuel-slot {
+    width: 54px;
+    height: 54px;
+    background: #2a2428;
+    border: 2px dashed #e74c3c;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    box-sizing: border-box;
+    flex-shrink: 0;
+}
+
+.atv-fuel-slot-label {
+    font-size: 9px;
+    color: #aaa;
+    pointer-events: none;
+    position: absolute;
+    top: 4px;
+}
+
+.atv-fuel-status {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+#atv-fuel-status-text {
+    font-size: 12px;
+    font-weight: bold;
+    color: #f1c40f;
+}
+
+#pen-ui {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 480px;
+    background: rgba(20, 24, 30, 0.96);
+    border: 2px solid #8b5a2b;
+    border-radius: 12px;
+    padding: 18px;
+    color: white;
+    z-index: 35;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.85);
+}
+
+.pen-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #444; padding-bottom: 8px; }
+.pen-status-bar { display: flex; justify-content: space-between; margin: 10px 0; font-size: 12px; font-weight: bold; }
+.pen-section { background: #1c1e24; border: 1px solid #333; padding: 10px; border-radius: 6px; margin-bottom: 10px; }
+.pen-section h4 { margin: 0 0 6px 0; font-size: 12px; color: #f1c40f; }
+
+.feed-bar-container { width: 100%; height: 12px; background: #111; border-radius: 6px; overflow: hidden; border: 1px solid #444; }
+.feed-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #e67e22, #2ecc71); transition: width 0.2s ease; }
+.feed-controls { display: flex; justify-content: space-between; align-items: center; margin-top: 6px; font-size: 11px; }
+
+.pen-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.pen-slot { height: 54px; background: #2a2a35; border: 1px dashed #666; border-radius: 6px; display: flex; justify-content: center; align-items: center; position: relative; cursor: pointer; }
+.pen-slot .slot-icon { font-size: 24px; }
+.pen-slot .slot-count { position: absolute; bottom: 2px; right: 4px; font-size: 11px; color: #f1c40f; font-weight: bold; }
